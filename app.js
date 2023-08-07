@@ -25,7 +25,7 @@ app.use(morgan("dev"));
 app.use(passport.initialize());
 passport.use("local", localStrategy);
 passport.use(jwtStrategy);
-
+npm;
 // Everything with the word temp is a placeholder that you'll change in accordance with your project
 app.use('/media', express.static(path.join(__dirname, 'media')));
 app.use("/user", userRoutes);

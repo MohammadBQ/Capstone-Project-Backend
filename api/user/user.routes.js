@@ -11,7 +11,6 @@ const router = express.Router();
 const passport = require("passport");
 
 
-
 router.param("userId", async (req, res, next, userId) => {
   try {
     const foundUser = await fetchUser(userId);
