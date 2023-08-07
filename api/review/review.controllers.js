@@ -3,6 +3,7 @@ const Laundry = require("../../models/Laundry");
 const User = require("../../models/User");
 
 exports.fetchReview = async (reviewId, next) => {
+
   try {
     const review1 = await Review.findById(reviewId);
     return review1;
@@ -107,3 +108,4 @@ exports.addReview = async (req, res, next) => {
     return res.status(500).json(err.message);
   }
 };
+

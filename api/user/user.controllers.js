@@ -1,4 +1,6 @@
+
 const User = require("../../models/User");
+
 const passHash = require("../../utils/auth/passhash");
 const generateToken = require("../../utils/auth/generateToken");
 
@@ -19,6 +21,7 @@ exports.getUser = async (req, res, next) => {
     return next(error);
   }
 };
+
 
 exports.signin = async (req, res, next) => {
   try {
@@ -41,6 +44,7 @@ exports.signup = async (req, res, next) => {
   }
 };
 
+
 exports.updateUser = async (req, res, next) => {
   try {
     await User.findByIdAndUpdate(req.user.id, req.body);
@@ -57,4 +61,5 @@ exports.deleteUser = async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
+
 };

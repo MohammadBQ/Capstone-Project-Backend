@@ -1,4 +1,5 @@
 module.exports = (req, res, next) => {
+
   if (req.body.rating < 1 || req.body.rating > 5)
     return next({
       status: 404,
@@ -6,3 +7,4 @@ module.exports = (req, res, next) => {
     });
   next();
 };
+
