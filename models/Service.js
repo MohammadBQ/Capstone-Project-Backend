@@ -9,7 +9,6 @@ const ServiceSchema = new Schema({
   baskets: [{ type: Schema.Types.ObjectId, ref: "Basket" }],
   laundries: [{ type: Schema.Types.ObjectId, ref: "Laundry" }],
 
-
   // create relations in here and in the other model
 });
 
