@@ -1,77 +1,79 @@
-const Service = require("../../models/Service");
-const Basket = require("../../models/Basket");
+const Service = require("../../models/Service")
+const Item = require("../../models/Item")
 
-exports.fetchServiceById = async (serviceId) => {
-  const service = await Service.findById(serviceId);
-  return service;
-};
 
-exports.addServices = async (req, res, next) => {
-  try {
-    if (!req.user) {
-      return res.status(403).json({ error: "You can't add a Item " });
+exports.fetchService = async (serviceId, next) => {
+
+    try {
+      const service = await Service.findById(serviceId);
+      return service;
+    } catch (error) {
+      return next(error);
     }
-    if (req.file) {
-      req.body.serviceImage = `${req.file.path}`;
+  };
+
+  exports.addService = async (req, res, next) => {
+    try {
+      if (!req.user) {
+        return res.status(403).json({ error: "You can't add a service " });
+        
+      }
+  
+
+      const service = await Service.create(req.body);
+      res.status(201).json(service);
+      next(error);
+    } catch (error) {
+      next(error);
     }
-    const service = await Service.create(req.body);
-    res.status(201).json(service);
-    next(error);
-  } catch (error) {
-    next(error);
-  }
-};
+  };
+  exports.getServiceById = async (req, res, next) => {
+    try {
+      return res.status(200).json(req.service);
+    } catch (error) {
+      return next(error);
+    }
+  };
 
-exports.getAllServices = async (req, res, next) => {
-  try {
-    // Populate here
-    const services = await Service.find().populate("baskets");
-    return res.status(200).json(services);
-  } catch (error) {
-    return next(error);
-  }
-};
 
-exports.getServiceById = async (req, res, next) => {
-  try {
-    return res.status(200).json(req.service);
-  } catch (error) {
-    return next(error);
-  }
-};
+  exports.getAllServices = async (req, res, next) => {
+    try {
+      const services = await Service.find();
+      res.json(services);
+    } catch (error) {
+      next(error);
+    }
+  };
+  
 
-exports.addServiceToBasket = async (req, res, next) => {
-  try {
-    const { serviceId } = req.params; // i can create a route.param
-    const service = await Service.findById(serviceId);
 
-    await Basket.findByIdAndUpdate(req.basket._id, {
-      $push: { services: service._id },
-    }); // so we are takeing the tag and put it in the post
+exports.addServiceToItem = async (req, res, next) => {
+    try {
+      const { serviceId } = req.params; // i can create a route.param
+      const service = await Service.findById(serviceId);
+  
+      await Item.findByIdAndUpdate(req.item._id, {
+        $push: { services: service._id },
+      }); // so we are takeing the tag and put it in the post
+  
+      await Service.findByIdAndUpdate(serviceId, {
+        $push: { items: req.item._id },
+      });
+      res.status(204).end();
+    } catch (error) {
+      next(error);
+    }
+  };
 
-    await Service.findByIdAndUpdate(serviceId, {
-      $push: { baskets: req.basket._id },
-    });
-    res.status(204).end();
-  } catch (error) {
-    next(error);
-  }
-};
 
-exports.updateService = async (req, res, next) => {
-  try {
-    await Service.findByIdAndUpdate(req.service.id, req.body);
-    return res.status(204).end();
-  } catch (error) {
-    return next(error);
-  }
-};
+  exports.deleteServiceById = async (req, res, next) => {
+    try {
+      await req.service.deleteOne();
+      return res.status(204).end();
+    } catch (error) {
+      return next(error);
+    }
+  };
 
-exports.deleteService = async (req, res, next) => {
-  try {
-    await Service.findByIdAndRemove({ _id: req.service.id });
-    return res.status(204).end();
-  } catch (error) {
-    return next(error);
-  }
-};
+
+  

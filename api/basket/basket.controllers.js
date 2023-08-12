@@ -40,3 +40,13 @@ exports.getBasketById = async (req, res, next) => {
   }
 };
 
+
+
+exports.updateBasket = async (req, res, next) => {
+  try {
+    await Basket.findByIdAndUpdate(req.basket.id, req.body);
+    return res.status(204).end();
+  } catch (error) {
+    return next(error);
+  }
+};

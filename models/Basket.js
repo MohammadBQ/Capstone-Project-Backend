@@ -5,7 +5,8 @@ const BasketSchema = new Schema({
 
   comment: { type: String },
   user: { type: Schema.Types.ObjectId, ref: "User" },
-  services: [{ type: Schema.Types.ObjectId, ref: "Service" }],
+  items: [{ type: Schema.Types.ObjectId, ref: "Item" }],
+  services: [{type: Schema.Types.ObjectId, ref: "Service" }],
 
 
   // create relations in here and in the other model

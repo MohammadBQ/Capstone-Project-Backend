@@ -6,11 +6,13 @@ const path = require("path");
 const notFound = require("./middlewares/notFoundHandler");
 const errorHandler = require("./middlewares/errorHandler");
 const userRoutes = require("./api/user/user.routes");
-const serviceRoutes = require("./api/service/service.routes");
+const itemRoutes = require("./api/item/item.routes");
 const laundryRoutes = require("./api/laundry/laundry.routes");
 const basketRoutes = require("./api/basket/basket.routes");
 const reviewRoutes = require("./api/review/review.routes");
 const receiptRoutes = require("./api/receipt/receipt.routes");
+const serviceRoutes = require("./api/service/service.routes");
+const adressRoutes = require("./api/adress/adress.routes")
 const config = require("./config/keys");
 const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middlewares/passport");
@@ -28,11 +30,14 @@ passport.use(jwtStrategy);
 // Everything with the word temp is a placeholder that you'll change in accordance with your project
 app.use("/media", express.static(path.join(__dirname, "media")));
 app.use("/user", userRoutes);
-app.use("/service", serviceRoutes);
+app.use("/item", itemRoutes);
 app.use("/laundry", laundryRoutes);
 app.use("/basket", basketRoutes);
 app.use("/review", reviewRoutes);
 app.use("/receipt", receiptRoutes);
+app.use("/service", serviceRoutes);
+app.use("/adress", adressRoutes);
+
 
 app.use(notFound);
 app.use(errorHandler);

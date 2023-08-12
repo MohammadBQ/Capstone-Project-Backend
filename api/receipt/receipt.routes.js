@@ -16,7 +16,7 @@ router.param("receiptId", async (req, res, next, receiptId) => {
     try {
       const foundReceipt = await fetchReceiptById(receiptId);
       if (!foundReceipt) return next({ status: 404, message: "No receipt with this id" });
-      reqreceipt = foundReceipt;
+      req.receipt = foundReceipt;
       return next();
     } catch (error) {
       return next(error);

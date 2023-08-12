@@ -8,6 +8,7 @@ const {
   getAllBaskets,
   getBasketById,
   createBasket,
+  updateBasket,
 } = require("./basket.controllers");
 
 router.param("basketId", async (req, res, next, basketId) => {
@@ -26,7 +27,7 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   createBasket
 );
-
+router.put("/:basketId", updateBasket);
 router.get("/", getAllBaskets);
 router.get("/:basketId", getBasketById);
 
