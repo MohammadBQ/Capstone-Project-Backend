@@ -8,6 +8,7 @@ const LaundrySchema = new Schema({
   number: { type: Number, required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
+  items: [{type: Schema.Types.ObjectId, ref: "Item" }],
   reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   receipts: [{ type: Schema.Types.ObjectId, ref: "Receipt" }],
   user: [{ type: Schema.Types.ObjectId, ref: "User" }],
