@@ -3,7 +3,18 @@ const { model, Schema } = require("mongoose");
 
 const LaundrySchema = new Schema({
   name: { type: String, unique: true, required: true },
-  location: { type: String, required: true },
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      default: "Point",
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+      default: [0, 0],
+    },
+  },
   workingHours: { type: String, required: true },
   number: { type: Number, required: true },
   description: { type: String, required: true },
