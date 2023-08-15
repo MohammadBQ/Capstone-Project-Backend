@@ -11,8 +11,8 @@ const LaundrySchema = new Schema({
   items: [{type: Schema.Types.ObjectId, ref: "Item" }],
   reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   receipts: [{ type: Schema.Types.ObjectId, ref: "Receipt" }],
+  items: [{ type: Schema.Types.ObjectId, ref: "Item" }],
   user: [{ type: Schema.Types.ObjectId, ref: "User" }],
-
 
   // create relations in here and in the other model
 });
