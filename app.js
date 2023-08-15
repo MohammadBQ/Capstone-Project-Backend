@@ -12,7 +12,8 @@ const basketRoutes = require("./api/basket/basket.routes");
 const reviewRoutes = require("./api/review/review.routes");
 const receiptRoutes = require("./api/receipt/receipt.routes");
 const serviceRoutes = require("./api/service/service.routes");
-const adressRoutes = require("./api/adress/adress.routes")
+const adressRoutes = require("./api/adress/adress.routes");
+const orderRoutes = require("./api/order/order.routes");
 const config = require("./config/keys");
 const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middlewares/passport");
@@ -37,7 +38,7 @@ app.use("/review", reviewRoutes);
 app.use("/receipt", receiptRoutes);
 app.use("/service", serviceRoutes);
 app.use("/adress", adressRoutes);
-
+app.use("/order", orderRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
