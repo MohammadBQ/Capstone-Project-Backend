@@ -4,7 +4,7 @@ const { model, Schema } = require("mongoose");
 const LaundrySchema = new Schema({
   name: { type: String, unique: true, required: true },
   location: { type: String, required: true },
-
+  workingHours: { type: String, required: true },
   number: { type: Number, required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
